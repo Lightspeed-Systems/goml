@@ -149,6 +149,9 @@ type NaiveBayes struct {
 	// Probabilities[i] for
 	Probabilities []float64 `json:"probabilities"`
 
+	// ClassNames are string labels for class 0, 1, 2, ...
+	ClassNames []string `json:"class_names"`
+
 	// DocumentCount holds the number of
 	// documents that have been seen
 	DocumentCount uint64 `json:"document_count"`
@@ -267,12 +270,19 @@ func NewNaiveBayes(stream chan base.TextDatapoint, classes uint8, sanitize func(
 		Words:         concurrentMap{sync.RWMutex{}, make(map[string]Word)},
 		Count:         make([]uint64, classes),
 		Probabilities: make([]float64, classes),
+		ClassNames:    make([]string, classes),
 
 		sanitize:  transform.RemoveFunc(sanitize),
 		stream:    stream,
 		Tokenizer: &SimpleTokenizer{SplitOn: " "},
 
 		Output: os.Stdout,
+	}
+}
+
+func (b *NaiveBayes) SetClassNames(names ...string) {
+	for i, name := range names {
+		b.ClassNames[i] = name
 	}
 }
 
