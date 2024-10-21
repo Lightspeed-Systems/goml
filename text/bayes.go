@@ -262,7 +262,7 @@ type Word struct {
 // to learn off the given data stream. The sanitization
 // function is set to the given function. It must
 // comply with the transform.RemoveFunc interface
-func NewNaiveBayes(stream <-chan base.TextDatapoint, classes uint8, sanitize func(rune) bool) *NaiveBayes {
+func NewNaiveBayes(stream chan base.TextDatapoint, classes uint8, sanitize func(rune) bool) *NaiveBayes {
 	return &NaiveBayes{
 		Words:         concurrentMap{sync.RWMutex{}, make(map[string]Word)},
 		Count:         make([]uint64, classes),
