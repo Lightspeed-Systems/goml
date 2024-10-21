@@ -280,7 +280,7 @@ func NewNaiveBayes(stream chan base.TextDatapoint, classes uint8, sanitize func(
 	}
 }
 
-func (b *NaiveBayes) SetClassNames(names ...string) {
+func (b *NaiveBayes) SetClassNames(names []string) {
 	for i, name := range names {
 		b.ClassNames[i] = name
 	}
