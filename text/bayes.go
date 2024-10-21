@@ -169,7 +169,7 @@ type NaiveBayes struct {
 
 	// tokenizer is used by a model
 	// to split the input into tokens
-	Tokenizer Tokenizer `json:"tokenizer"`
+	Tokenizer Tokenizer `json:"-"` // unable to serialize
 
 	// Output is the io.Writer used for logging
 	// and printing. Defaults to os.Stdout.
