@@ -6,7 +6,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/cdipaolo/goml/base"
+	"github.com/Lightspeed-Systems/goml/base"
 
 	"github.com/stretchr/testify/assert"
 )

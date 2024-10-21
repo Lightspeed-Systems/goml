@@ -1,7 +1,7 @@
 ## Base Package
-### `import "github.com/cdipaolo/goml/base"`
+### `import "github.com/Lightspeed-Systems/goml/base"`
 
-[![GoDoc](https://godoc.org/github.com/cdipaolo/goml/base?status.svg)](https://godoc.org/github.com/cdipaolo/goml/base)
+[![GoDoc](https://godoc.org/github.com/Lightspeed-Systems/goml/base?status.svg)](https://godoc.org/github.com/Lightspeed-Systems/goml/base)
 
 This package helps define common patterns (interfaces,) as well as letting you work with data, get it into your programs, and munge through it.
 
