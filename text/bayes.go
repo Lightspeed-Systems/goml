@@ -409,7 +409,10 @@ func (b *NaiveBayes) AllProbabilities(sentence string) []float64 {
 // OnlineLearn lets the NaiveBayes model learn
 // from the datastream, waiting for new data to
 // come into the stream from a separate goroutine
-func (b *NaiveBayes) OnlineLearn(errors chan<- error) {
+func (b *NaiveBayes) OnlineLearn(wg *sync.WaitGroup, errors chan<- error) {
+
+	defer wg.Done()
+
 	if errors == nil {
 		errors = make(chan error)
 	}
