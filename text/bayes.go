@@ -374,6 +374,38 @@ func (b *NaiveBayes) Probability(sentence string) (uint8, float64) {
 	return uint8(maxI), sums[maxI] / denom
 }
 
+// AllProbabilities returns the estimated probability for all categories
+func (b *NaiveBayes) AllProbabilities(sentence string) []float64 {
+	sums := make([]float64, len(b.Count))
+	for i := range sums {
+		sums[i] = 1
+	}
+
+	sentence, _, _ = transform.String(b.sanitize, sentence)
+	words := b.Tokenizer.Tokenize(sentence)
+	for _, word := range words {
+		w, ok := b.Words.Get(word)
+		if !ok {
+			continue
+		}
+
+		for i := range sums {
+			sums[i] *= float64(w.Count[i]+1) / float64(w.Seen+b.DictCount)
+		}
+	}
+
+	var normalize float64
+	for i := range sums {
+		sums[i] *= b.Probabilities[i]
+		normalize += sums[i]
+	}
+	for i := range sums {
+		sums[i] /= normalize
+	}
+
+	return sums
+}
+
 // OnlineLearn lets the NaiveBayes model learn
 // from the datastream, waiting for new data to
 // come into the stream from a separate goroutine
